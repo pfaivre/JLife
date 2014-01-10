@@ -1,10 +1,10 @@
 JLife
 =====
 
-# NOM
+## NOM
 JLife - Simple simulateur du jeu de la vie de John Horton Conway.
 
-# SYNOPSIS
+### SYNOPSIS
 JLife [option]... [file]
 
 DESCRIPTION
