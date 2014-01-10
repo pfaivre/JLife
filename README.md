@@ -2,6 +2,7 @@ JLife
 =====
 
 NOM
+---
 	JLife - Simple simulateur du jeu de la vie de John Horton Conway.
 
 SYNOPSIS
