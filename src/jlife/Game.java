@@ -184,7 +184,8 @@ class Game {
     private void processManual() {
         int i = 0;
         boolean isEmpty = false;
-        Scanner sc = new Scanner(System.in);
+        Scanner sc;
+        sc = new Scanner(System.in);
 
         Display.drawGrid(this.grid);
         i = 0;
