@@ -26,7 +26,7 @@
 package jlife;
 
 /**
- * Classe principale
+ * Classe principale.
  * @author Faivre Pierre
  */
 class JLife {
