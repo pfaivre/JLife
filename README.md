@@ -14,9 +14,13 @@ Le jeu de la vie est un automate cellulaire inventé par John Horton Conway en 1
 
 ### MODES
 Par défaut, JLife fonctionne en mode automatique. Il peut aussi fonctionner en mode interactif ou mode silencieux.
+
 JLife -a=50 Démarre le mode automatique avec un délai de 50 millisecondes.
+
 JLife -i Démarre le mode interactif. L'utilisateur doit alors appuyer sur entrée pour faire défiler les générations.
+
 JLife -g=500 -q Calcule immédiatement 500 générations et enregistre la grille résultante dans file.
+
 À noter qu'une seule de ces trois options ne peut être appelée à la fois.
 
 ### OPTIONS
