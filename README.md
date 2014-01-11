@@ -47,7 +47,7 @@ Définit le nombre de cases en largeur de la grille.
 	-h, --height=number
 Définit le nombre de cases en hauteur de la grille.
 
-  -d, --density=number
+	-d, --density=number
 Nombre allant de 1 à 10 définissant la densité de cellules vivantes dans la grille.
 
 ### AUTEUR
