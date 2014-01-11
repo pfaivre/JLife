@@ -18,7 +18,7 @@
   *
   * Game.java
   * Creation : 02/10/2013
-  * Last modification : 08/01/2014
+  * Last modification : 11/01/2014
   *
   * Description : Implémentation basique du jeu de la vie de John Horton Conway.
   */
@@ -57,7 +57,7 @@ class Game {
         CommandLineParser clp = new CommandLineParser(args);
         String[] validArguments = {"a", "auto", "g", "generations", "h", "help",
             "i", "interactive", "q", "quiet",
-            "w", "h", "d"};
+            "w", "width", "h", "height", "d", "density"};
 
         // Vérification de la validité des arguments
         String check = clp.getInvalidArgument(validArguments);
@@ -89,6 +89,12 @@ class Game {
      * @param clp Arguments donnés par l'utilisateur
      */
     private void loadParameters(CommandLineParser clp) throws CommandLineArgumentException {
+        // Affichage de l'aide
+        if (clp.isDefined("h") || clp.isDefined("help")) {
+            Display.helpMessage();
+            System.exit(0);
+        }
+        
         // Définition du nombre max de générations
         if (clp.isDefined("g") || clp.isDefined("generations")) {
             if (clp.getIntegerValue("g") != null) {
@@ -148,8 +154,8 @@ class Game {
                 this.density = clp.getIntegerValue("density").intValue();
             }
 
-            if (this.density < 0) {
-                this.density = 0;
+            if (this.density < 1) {
+                this.density = 1;
             } else if (this.density > 10) {
                 this.density = 10;
             }

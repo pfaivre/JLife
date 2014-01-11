@@ -8,7 +8,7 @@ JLife - Simple simulateur du jeu de la vie de John Horton Conway.
 	JLife [option]... [file]
 
 ### DESCRIPTION
-Ce manuel décrit brièvement l'utilisation du proramme JLife.
+Ce manuel décrit brièvement l'utilisation du programme JLife.
 JLife est un programme en ligne de commande simulant un espace en deux dimensions dans lequel sont appliquées les règles du jeu de la vie.
 Le jeu de la vie est un automate cellulaire inventé par John Horton Conway en 1970.
 
@@ -19,7 +19,7 @@ JLife -a=50 Démarre le mode automatique avec un délai de 50 millisecondes.
 
 JLife -i Démarre le mode interactif. L'utilisateur doit alors appuyer sur entrée pour faire défiler les générations.
 
-JLife -g=500 -q Calcule immédiatement 500 générations et enregistre la grille résultante dans file.
+JLife -g=500 -q Calcule immédiatement 500 générations.
 
 À noter qu'une seule de ces trois options ne peut être appelée à la fois.
 
@@ -38,6 +38,17 @@ Démarre le programme en mode interactif. L'utilisateur doit alors appuyer sur e
 
 	-q, --quiet
 Démarre le programme en mode rapide (sans délais) et n'affiche que la grille résultante.
+
+Les options suivantes paramètrent la génération aléatoire de la grille, si aucun fichier n'est spécifié.
+
+	-w, --width=number
+Définit le nombre de cases en largeur de la grille.
+
+	-h, --height=number
+Définit le nombre de cases en hauteur de la grille.
+
+  -d, --density=number
+Nombre allant de 1 à 10 définissant la densité de cellules vivantes dans la grille.
 
 ### AUTEUR
 Écrit par Pierre Faivre

@@ -18,7 +18,7 @@
   *
   * Display.java
   * Creation : 29/09/2013
-  * Last modification : 08/01/2014
+  * Last modification : 11/01/2014
   *
   * Description : Implémentation basique du jeu de la vie de John Horton Conway.
   */
@@ -107,6 +107,14 @@ class Display {
      * Affiche une brève aide sur l'utilisation du programme.
      */
     public static void helpMessage() {
-        System.out.println("usage : JLife [" + Color.LIGHT_RED + "-g" + Color.NORMAL + "=" + Color.LIGHT_GREEN + "max_generations" + Color.NORMAL + "] [" + Color.LIGHT_RED + "-i" + Color.NORMAL + "|" + Color.LIGHT_RED + "-a" + Color.NORMAL + "|" + Color.LIGHT_RED + "-q" + Color.NORMAL + "]\n              [[-w=width -h=height -d=density] | [FILE]]");
+        System.out.println("usage : JLife [" + Color.LIGHT_RED + "-g" + Color.NORMAL 
+                           + "=" + Color.LIGHT_GREEN + "max_generations" + Color.NORMAL
+                           + "] [" + Color.LIGHT_RED + "-i" + Color.NORMAL + "|" + Color.LIGHT_RED
+                           + "-a" + Color.NORMAL + "|" + Color.LIGHT_RED + "-q" + Color.NORMAL
+                           + "]\n              [[" + Color.LIGHT_RED + "-w" + Color.NORMAL
+                           + "=" + Color.LIGHT_GREEN + "width " + Color.LIGHT_RED
+                           + "-h" + Color.NORMAL + "=" + Color.LIGHT_GREEN + "height "
+                           + Color.LIGHT_RED + "-d" + Color.NORMAL + "=" + Color.LIGHT_GREEN
+                           + "density" + Color.NORMAL + "] | [FILE]]");
     }
 }
