@@ -1,54 +1,53 @@
 JLife
 =====
 
-## NOM
-JLife - Simple simulateur du jeu de la vie de John Horton Conway.
+## Name
+JLife - Basic implementation of the Conway's game of life.
 
-## SYNOPSIS
+## Synopsis
 	JLife [option]... [file]
 
-## DESCRIPTION
-Ce manuel décrit brièvement l'utilisation du programme JLife.
-JLife est un programme en ligne de commande simulant un espace en deux dimensions dans lequel sont appliquées les règles du jeu de la vie.
-Le jeu de la vie est un automate cellulaire inventé par John Horton Conway en 1970.
+## Description
+JLife is a command line program that simulates a two-dimensional space where the rules of game of life apply. [Game of life](http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) is a cellular automaton invented by John Horton Conway in 1970.
 
-## MODES
-Par défaut, JLife fonctionne en mode automatique. Il peut aussi fonctionner en mode interactif ou mode silencieux.
+## Modes
+By default, JLife starts in automatic mode. It means that each generation will be shown regularly, the delay is configurable. It can also be interactive or quiet.
 
-`JLife -a=50` Démarre le mode automatique avec un délai de 50 millisecondes.
+`JLife -a=50` Starts the automatic mode with a delay of 50 milliseconds.
 
-`JLife -i` Démarre le mode interactif. L'utilisateur doit alors appuyer sur entrée pour faire défiler les générations.
+`JLife -i` Starts the interactive mode. The user must press Enter to display the next generation.
 
-`JLife -g=500 -q` Calcule immédiatement 500 générations.
+`JLife -q -g=500` Quiet mode. Computes 500 generations and show the last one.
 
-À noter qu'une seule de ces trois options ne peut être appelée à la fois.
+Note that only one of these three options can be called at once.
 
-## OPTIONS
+## Options
 	-a, --auto[=delay]
-Démarre le programme en mode automatique. delay est le temps entre chaque générations en millisecondes, par défaut 100.
+Starts the automatic mode. `delay` is the time in milliseconds between each generation. By default it is 100.
 
 	-g, --generations=max_gens
-Spécifie le nombre maximal de générations à calculer. -1 pour pas de limite.
+Specifies the maximum number of generations to compute.
 
 	-h, --help
-Affiche un message d'aide et quitte le programme.
+Prints short help and exit.
 
 	-i, --interactive
-Démarre le programme en mode interactif. L'utilisateur doit alors appuyer sur entrée pour passer à la génération suivante.
+Starts the interactive mode. The user must press Enter to display the next generation.
 
 	-q, --quiet
-Démarre le programme en mode rapide (sans délais) et n'affiche que la grille résultante.
+Computes quickly and show only the last generation.
 
-Les options suivantes paramètrent la génération aléatoire de la grille, si aucun fichier n'est spécifié.
+## Grid Options
+The following options configure the random creation of the grid if no file is specified.
 
 	-w, --width=number
-Définit le nombre de cases en largeur de la grille.
+Sets the number of cells in the grid width.
 
 	-h, --height=number
-Définit le nombre de cases en hauteur de la grille.
+Sets the number of cells in the grid height.
 
 	-d, --density=number
-Nombre allant de 1 à 10 définissant la densité de cellules vivantes dans la grille.
+Sets the density of living cells. Number from 1 to 10.
 
-## AUTEUR
-Écrit par Pierre Faivre
+## License
+Copyright 2014 Pierre Faivre. This is free software, and may be redistributed under the terms specified in the LICENSE file.
