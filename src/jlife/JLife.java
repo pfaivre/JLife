@@ -18,7 +18,7 @@
   *
   * JLife.java
   * Creation : 29/09/2013
-  * Last modification : 03/10/2013
+  * Last modification : 12/01/2014
   *
   * Description : Implémentation basique du jeu de la vie de John Horton Conway.
   */
@@ -38,8 +38,10 @@ class JLife {
       game = new Game(args);
       game.start();
     }
-    catch (Exception e) {
+    catch (CommandLineArgumentException e) {
       Display.errorMessage(e.getMessage());
+      System.out.println("Try 'JLife --help' for more informations.");
+      System.exit(1);
     }
   }
 

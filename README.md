@@ -28,7 +28,7 @@ Starts the automatic mode. `delay` is the time in milliseconds between each gene
 	-g, --generations=max_gens
 Specifies the maximum number of generations to compute.
 
-	-h, --help
+	-?, --help
 Prints short help and exit.
 
 	-i, --interactive
