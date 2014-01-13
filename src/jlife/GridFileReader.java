@@ -70,8 +70,6 @@ public class GridFileReader {
             
             c = fr.read(); // Et on continue la lecture
         }
-
-        System.out.println(this.width + "x" + this.height);
         
         fr.close();
     }
@@ -80,7 +78,7 @@ public class GridFileReader {
      * Créée un ArrayList<Cell> en suivant les motifs du fichier.
      * @return ArrayList<Cell>
      */
-    public ArrayList getGrid() throws IOException {
+    public ArrayList<Cell> getGrid() throws IOException {
         FileReader fr = new FileReader(fileName);
         ArrayList<Cell> grid = new ArrayList<>();
         

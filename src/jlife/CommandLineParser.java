@@ -18,7 +18,7 @@
  *
  * CommandLineParser.java
  * Creation : 02/10/2013
- * Last modification : 12/01/2014
+ * Last modification : 13/01/2014
  *
  * Description : Implémentation basique du jeu de la vie de John Horton Conway.
  */
@@ -30,12 +30,12 @@ import java.util.ArrayList;
 /**
  * Gère l'interprétation des paramètres fournis en ligne de commande
  *
- * Le format de paramètre accepté est le suivant : — Chaque paramètre dispose
- * d'une clé et d'une valeur optionnelle — La valeur est spécifiée derrière le
- * signe '=', Exemple : -l=100 — Un paramètre raccourcit est précédé du signe
- * '-', Exemple : -l — Un paramètre long est précédé du signe "--", Exemple :
- * --largeur — Un paramètre sans '-' ni "--" est considéré comme une valeur sans
- * clé
+ * Le format de paramètre accepté est le suivant :
+ * — Chaque paramètre dispose d'une clé et d'une valeur optionnelle
+ * — La valeur est spécifiée derrière le signe '=', Exemple : -l=100
+ * — Un paramètre raccourci est précédé du signe '-', Exemple : -l
+ * — Un paramètre long est précédé du signe "--", Exemple : --largeur
+ * — Un paramètre sans '-' ni "--" est considéré comme une valeur sans clé
  *
  * Exemple d'utilisation : JLife --quiet -g=50 ./file
  *
@@ -168,7 +168,7 @@ class CommandLineParser {
 
         return found;
     }
-
+    
     /**
      * Donne la valeur associée au paramètre.
      *

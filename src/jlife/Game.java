@@ -18,7 +18,7 @@
  *
  * Game.java
  * Creation : 02/10/2013
- * Last modification : 12/01/2014
+ * Last modification : 13/01/2014
  *
  * Description : Implémentation basique du jeu de la vie de John Horton Conway.
  */
@@ -78,7 +78,7 @@ class Game {
 
     /**
      * Étudie les arguments donnés afin de changer les paramètre de fonctionnement du programme.
-     * TODO: Réécrire cette fonction pour enlever la redondance (peut nécessiter une réécriture partielle des classes CommandLineParser ou CommandLineArgument).
+     * TODO: Réécrire cette méthode pour enlever la redondance (peut nécessiter une réécriture partielle des classes CommandLineParser ou CommandLineArgument).
      * @param clp Arguments donnés par l'utilisateur
      */
     private void loadParameters(CommandLineParser clp) throws CommandLineArgumentException {
@@ -100,23 +100,35 @@ class Game {
                 this.maxGeneration = clp.getIntegerValue("g").intValue();
             } else if (clp.getIntegerValue("generations") != null) {
                 this.maxGeneration = clp.getIntegerValue("generations").intValue();
+            } else {
+                throw new CommandLineArgumentException("Number of generations must follow -g or --generations");
             }
         }
 
-        // Définition du mode [automatique | interactif | silencieux]
+        // Définition du mode automatique
         if (clp.isDefined("a") || clp.isDefined("auto")) {
             if (clp.isDefined("i") || clp.isDefined("interactive") || clp.isDefined("q") || clp.isDefined("quiet")) {
-                throw new CommandLineArgumentException("Connot load multiples modes");
+                throw new CommandLineArgumentException("Cannot load multiples modes");
             }
             this.mode = GameMode.AUTO;
+            if (clp.getIntegerValue("a") != null) {
+                this.delay = clp.getIntegerValue("a");
+            } else if (clp.getIntegerValue("auto") != null) {
+                this.delay = clp.getIntegerValue("auto");
+            }
+            if (this.delay < 0) {
+                this.delay = 1;
+            }
+        // Définition du mode interactif
         } else if (clp.isDefined("i") || clp.isDefined("interactive")) {
             if (clp.isDefined("a") || clp.isDefined("auto") || clp.isDefined("q") || clp.isDefined("quiet")) {
-                throw new CommandLineArgumentException("Connot load multiples modes");
+                throw new CommandLineArgumentException("Cannot load multiples modes");
             }
             this.mode = GameMode.INTERACTIVE;
+        // Définition du mode silencieux
         } else if (clp.isDefined("q") || clp.isDefined("quiet")) {
             if (clp.isDefined("i") || clp.isDefined("interactive") || clp.isDefined("a") || clp.isDefined("auto")) {
-                throw new CommandLineArgumentException("Connot load multiples modes");
+                throw new CommandLineArgumentException("Cannot load multiples modes");
             }
             this.mode = GameMode.QUIET;
         }
@@ -127,6 +139,8 @@ class Game {
                 this.width = clp.getIntegerValue("w").intValue();
             } else if (clp.getIntegerValue("width") != null) {
                 this.width = clp.getIntegerValue("width").intValue();
+            } else {
+                throw new CommandLineArgumentException("Number of columns must follow -w or --width");
             }
 
             if (this.width <= 0) {
@@ -139,6 +153,8 @@ class Game {
                 this.height = clp.getIntegerValue("h").intValue();
             } else if (clp.getIntegerValue("height") != null) {
                 this.height = clp.getIntegerValue("height").intValue();
+            } else {
+                throw new CommandLineArgumentException("Number of lines must follow -h or --height");
             }
 
             if (this.height <= 0) {
@@ -151,6 +167,8 @@ class Game {
                 this.density = clp.getIntegerValue("d").intValue();
             } else if (clp.getIntegerValue("density") != null) {
                 this.density = clp.getIntegerValue("density").intValue();
+            } else {
+                throw new CommandLineArgumentException("A number must follow -d or --density");
             }
 
             if (this.density < 1) {
