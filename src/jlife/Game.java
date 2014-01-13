@@ -25,6 +25,7 @@
 
 package jlife;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -37,14 +38,15 @@ class Game {
     private GameMode mode;       // Mode de fonctionnement du programme
     private int delay;           // Délai en mode automatique
     private int maxGeneration;   // Nombre maximal de générations
-    private int width;           // Largeur de la grille.
-    private int height;          // Hauteur de la grille.
+    private int width;           // Largeur de la grille
+    private int height;          // Hauteur de la grille
     private int density;         // Densité de cellules vivantes en mode aléatoire
+    private String file;         // Fichier contenant un grille à charger
 
     // Grille du jeu
     private Grid grid;
 
-    public Game(String args[]) throws CommandLineArgumentException {
+    public Game(String args[]) throws CommandLineArgumentException, IOException {
         // Valeur par défaut des paramètres
         this.mode = GameMode.AUTO;
         this.delay = 200;
@@ -52,6 +54,7 @@ class Game {
         this.width = 50;
         this.height = 20;
         this.density = 5;
+        this.file = null;
 
         // Interprétation des paramètres de la ligne de commande
         String[] validArguments = {"a", "auto", "g", "generations", "?", "help",
@@ -63,7 +66,14 @@ class Game {
         this.loadParameters(clp);
 
         // Création de la grille.
-        this.grid = new Grid(this.width, this.height, this.density);
+        if (this.file != null) {
+            // Si un fichier est spécifié, on le charge.
+            this.grid = new Grid(this.file);
+        }
+        else {
+            // Sinon on génère une grille aléatoire.
+            this.grid = new Grid(this.width, this.height, this.density);
+        }
     }
 
     /**
@@ -76,6 +86,12 @@ class Game {
         if (clp.isDefined("?") || clp.isDefined("help")) {
             Display.helpMessage();
             System.exit(0);
+        }
+        
+        // On regarde si un fichier a été passé en paramètre.
+        String lastOrphanValue = clp.getLastOrphanValue();
+        if (lastOrphanValue.compareTo("") != 0) { // S'il y a bien un paramètre sans clé
+            this.file = lastOrphanValue; // On le considère comme un fichier
         }
         
         // Définition du nombre max de générations

@@ -25,6 +25,8 @@
 
 package jlife;
 
+import java.io.IOException;
+
 /**
  * Classe principale.
  * @author Faivre Pierre
@@ -41,6 +43,10 @@ class JLife {
     catch (CommandLineArgumentException e) {
       Display.errorMessage(e.getMessage());
       System.out.println("Try 'JLife --help' for more informations.");
+      System.exit(1);
+    }
+    catch (IOException e) {
+      Display.errorMessage(e.getMessage());
       System.exit(1);
     }
   }

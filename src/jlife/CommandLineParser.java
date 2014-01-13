@@ -37,7 +37,7 @@ import java.util.ArrayList;
  * --largeur — Un paramètre sans '-' ni "--" est considéré comme une valeur sans
  * clé
  *
- * Exemple d'utilisation : JLife -i -w=50 -h=20 -d=3 /home/pierre/file
+ * Exemple d'utilisation : JLife --quiet -g=50 ./file
  *
  * @author Faivre Pierre
  */
@@ -73,13 +73,13 @@ class CommandLineParser {
                 key = args[i].substring(1);
             } // Sinon c'est une valeur sans clé
             else {
-                // On l'ajoute avec la valeur null comme clé
-                arguments.add(new CommandLineArgument(null, args[i]));
+                // On l'ajoute avec la valeur "" comme clé
+                arguments.add(new CommandLineArgument("", args[i]));
                 // Retourne au début de la boucle et passe au paramètre suivant
                 continue;
             }
 
-      // Recherche d'une valeur associée au paramètre
+            // Recherche d'une valeur associée au paramètre
             // La clé contient-elle le signe "=" ?
             index = key.indexOf('=');
             if (index > 0) {
@@ -122,7 +122,7 @@ class CommandLineParser {
             valid = false;
 
             // On regarde d'abord si c'est un argument sans clé. Dans ce cas on ne peut pas vérifier sa validité
-            if (this.arguments.get(i).getKey() == null) {
+            if (this.arguments.get(i).getKey().compareTo("") == 0) {
                 // on le considère alors comme valide
                 valid = true;
             } else {
@@ -213,12 +213,12 @@ class CommandLineParser {
      */
     public String getLastOrphanValue() {
         int i = this.arguments.size() - 1; // On commence par le dernier indice
-        String value = null;
+        String value = "";
 
         // On parcours en partant de la fin
-        while (i >= 0 && value == null) {
-            // Dès qu'on trouve un élément dont la clé est nulle
-            if (this.arguments.get(i).getKey() == null) {
+        while (i >= 0 && value.compareTo("") == 0) {
+            // Dès qu'on trouve un élément sans clé
+            if (this.arguments.get(i).getKey().compareTo("") == 0) {
                 // On le prend
                 value = this.arguments.get(i).getValue();
             }

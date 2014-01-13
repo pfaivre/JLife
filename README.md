@@ -15,7 +15,7 @@ By default, JLife starts in automatic mode. It means that each generation will b
 
 `JLife -a=50` Starts the automatic mode with a delay of 50 milliseconds.
 
-`JLife -i` Starts the interactive mode. The user must press Enter to display the next generation.
+`JLife -i glider.jlf` Starts the interactive mode and load the file glider.jlf. The user must press Enter to display the next generation.
 
 `JLife -q -g=500` Quiet mode. Computes 500 generations and show the last one.
 

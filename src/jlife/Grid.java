@@ -18,13 +18,14 @@
   *
   * Grid.java
   * Creation : 29/09/2013
-  * Last modification : 02/10/2013
+  * Last modification : 12/01/2014
   *
   * Description : Implémentation basique du jeu de la vie de John Horton Conway.
   */
 
 package jlife;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -58,7 +59,11 @@ class Grid {
   /**
    * Créée une nouvelle grille et la remplit avec le fichier spécifié.
    */
-  public Grid() {
+  public Grid(String file) throws IOException {
+    GridFileReader gfr = new GridFileReader(file);
+    this.width = gfr.getWidth();
+    this.height = gfr.getHeight();
+    this.grid = gfr.getGrid();
     this.generation = 0;
   }
 
@@ -166,22 +171,15 @@ class Grid {
     for (int i = 0; i < this.width * this.height; i++) {
       Cell c = this.grid.get(i);
       livingNeighbors = getLivingNeighbors(i);
-      // S'il y a 0 ou 1 ou plus de 4 voisins morts, la cellule sera morte.
+      // S'il y a 0 ou 1 ou plus de 4 voisins vivants, la cellule sera morte.
       if (livingNeighbors <= 1 || livingNeighbors >= 4) {
         c.setNextGenerationState(false);
       }
-      // S'il y a deux voisins, on regarde si la cellule est déjà vivante ou non.
+      // S'il y a 2 voisins, la cellule garde son état.
       else if (livingNeighbors == 2) {
-        // si oui elle restera vivante.
-        if (c.isAlive()) {
-          c.setNextGenerationState(true);
-        }
-        // Sinon elle restera morte.
-        else {
-          c.setNextGenerationState(false);
-        }
+        c.setNextGenerationState(c.isAlive());
       }
-      // S'il y a 0 ou 1 voisin, la cellule naîtra.
+      // S'il y a 3 voisins, la cellule naîtra.
       else if (livingNeighbors == 3) {
         c.setNextGenerationState(true);
       }
