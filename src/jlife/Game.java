@@ -18,7 +18,7 @@
  *
  * Game.java
  * Creation : 02/10/2013
- * Last modification : 13/01/2014
+ * Last modification : 20/12/2014
  *
  * Description : Implémentation basique du jeu de la vie de John Horton Conway.
  */
@@ -32,7 +32,7 @@ import java.util.Scanner;
  * Classe comprenant une grille.
  * @author Faivre Pierre
  */
-class Game {
+public class Game {
 
     // Variables de paramètre
     private GameMode mode;       // Mode de fonctionnement du programme
@@ -97,9 +97,9 @@ class Game {
         // Définition du nombre max de générations
         if (clp.isDefined("g") || clp.isDefined("generations")) {
             if (clp.getIntegerValue("g") != null) {
-                this.maxGeneration = clp.getIntegerValue("g").intValue();
+                this.maxGeneration = clp.getIntegerValue("g");
             } else if (clp.getIntegerValue("generations") != null) {
-                this.maxGeneration = clp.getIntegerValue("generations").intValue();
+                this.maxGeneration = clp.getIntegerValue("generations");
             } else {
                 throw new CommandLineArgumentException("Number of generations must follow -g or --generations");
             }
@@ -136,9 +136,9 @@ class Game {
         // Définition de l'espace de jeu [largeur+hauteur+densité ou fichier]
         if (clp.isDefined("w") || clp.isDefined("width")) {
             if (clp.getIntegerValue("w") != null) {
-                this.width = clp.getIntegerValue("w").intValue();
+                this.width = clp.getIntegerValue("w");
             } else if (clp.getIntegerValue("width") != null) {
-                this.width = clp.getIntegerValue("width").intValue();
+                this.width = clp.getIntegerValue("width");
             } else {
                 throw new CommandLineArgumentException("Number of columns must follow -w or --width");
             }
@@ -150,9 +150,9 @@ class Game {
 
         if (clp.isDefined("h") || clp.isDefined("height")) {
             if (clp.getIntegerValue("h") != null) {
-                this.height = clp.getIntegerValue("h").intValue();
+                this.height = clp.getIntegerValue("h");
             } else if (clp.getIntegerValue("height") != null) {
-                this.height = clp.getIntegerValue("height").intValue();
+                this.height = clp.getIntegerValue("height");
             } else {
                 throw new CommandLineArgumentException("Number of lines must follow -h or --height");
             }
@@ -164,9 +164,9 @@ class Game {
 
         if (clp.isDefined("d") || clp.isDefined("density")) {
             if (clp.getIntegerValue("d") != null) {
-                this.density = clp.getIntegerValue("d").intValue();
+                this.density = clp.getIntegerValue("d");
             } else if (clp.getIntegerValue("density") != null) {
-                this.density = clp.getIntegerValue("density").intValue();
+                this.density = clp.getIntegerValue("density");
             } else {
                 throw new CommandLineArgumentException("A number must follow -d or --density");
             }
@@ -205,13 +205,13 @@ class Game {
      */
     private void processManual() {
         int i = 0;
-        boolean isEmpty = false;
+        boolean isInert = false;
         Scanner sc = new Scanner(System.in);
 
         Display.drawGrid(this.grid);
         i = 0;
-        while (i < this.maxGeneration && !isEmpty) {
-            isEmpty = !this.grid.nextGeneration();
+        while (i < this.maxGeneration && !isInert) {
+            isInert = !this.grid.nextGeneration();
             Display.drawGrid(this.grid);
             sc.nextLine();
             i++;
@@ -224,12 +224,12 @@ class Game {
      */
     private void processDelay() {
         int i = 0;
-        boolean isEmpty = false;
+        boolean isInert = false;
 
         Display.drawGrid(this.grid);
         i = 0;
-        while (i < this.maxGeneration && !isEmpty) {
-            isEmpty = !this.grid.nextGeneration();
+        while (i < this.maxGeneration && !isInert) {
+            isInert = !this.grid.nextGeneration();
             Display.drawGrid(this.grid);
             try {
                 Thread.sleep(this.delay);
@@ -245,7 +245,7 @@ class Game {
      */
     private void processQuiet() {
         int i = 0;
-        boolean isEmpty = false;
+        boolean isInert = false;
 
         // Affichage de la grille initiale
         Display.drawGrid(this.grid);
@@ -253,8 +253,8 @@ class Game {
 
         // Calcul
         i = 0;
-        while (i < this.maxGeneration && !isEmpty) {
-            isEmpty = !this.grid.nextGeneration();
+        while (i < this.maxGeneration && !isInert) {
+            isInert = !this.grid.nextGeneration();
             i++;
         }
 

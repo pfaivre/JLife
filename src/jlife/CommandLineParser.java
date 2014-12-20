@@ -18,7 +18,7 @@
  *
  * CommandLineParser.java
  * Creation : 02/10/2013
- * Last modification : 13/01/2014
+ * Last modification : 20/12/2014
  *
  * Description : Implémentation basique du jeu de la vie de John Horton Conway.
  */
@@ -64,21 +64,21 @@ class CommandLineParser {
         this.arguments = new ArrayList<>();
 
         // Parcours de la liste des arguments
-        for (int i = 0; i < args.length; i++) {
+        for (String arg : args) {
             // Si le paramètre commence par "--" alors c'est un paramètre long
-            if (args[i].startsWith("--")) {
-                key = args[i].substring(2);
+            if (arg.startsWith("--")) {
+                key = arg.substring(2);
             } // Sinon si il commence par "-" alors c'est un paramètre court
-            else if (args[i].startsWith("-")) {
-                key = args[i].substring(1);
+            else if (arg.startsWith("-")) {
+                key = arg.substring(1);
             } // Sinon c'est une valeur sans clé
             else {
                 // On l'ajoute avec la valeur "" comme clé
-                arguments.add(new CommandLineArgument("", args[i]));
+                arguments.add(new CommandLineArgument("", arg));
                 // Retourne au début de la boucle et passe au paramètre suivant
                 continue;
             }
-
+            
             // Recherche d'une valeur associée au paramètre
             // La clé contient-elle le signe "=" ?
             index = key.indexOf('=');
@@ -91,7 +91,7 @@ class CommandLineParser {
                 // Sinon ce paramètre n'a pas de valeur
                 value = null;
             }
-
+            
             // Puis on ajoute ce paramètre à la map.
             this.arguments.add(new CommandLineArgument(key, value));
         }

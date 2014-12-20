@@ -18,7 +18,7 @@
  *
  * Cell.java
  * Creation : 08/01/2014
- * Last modification : 19/12/2014
+ * Last modification : 20/12/2014
  *
  * Description : Implémentation basique du jeu de la vie de John Horton Conway.
  */
@@ -54,6 +54,7 @@ public enum Color {
         this. code = code;
     }
     
+    @Override
     public String toString() {
         return this.code;
     }

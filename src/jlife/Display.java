@@ -18,7 +18,7 @@
  *
  * Display.java
  * Creation : 29/09/2013
- * Last modification : 19/12/2014
+ * Last modification : 20/12/2014
  *
  * Description : Implémentation basique du jeu de la vie de John Horton Conway.
  */
@@ -29,7 +29,7 @@ package jlife;
  * Classe gérant l'interface utilisateur en console.
  * @author Faivre Pierre
  */
-class Display {
+public class Display {
 
     /**
      * Affiche la grille dans la console.

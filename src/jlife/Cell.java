@@ -18,7 +18,7 @@
  *
  * Cell.java
  * Creation : 29/09/2013
- * Last modification : 19/12/2014
+ * Last modification : 20/12/2014
  *
  * Description : Implémentation basique du jeu de la vie de John Horton Conway.
  */
@@ -29,7 +29,7 @@ package jlife;
  * La cellule.
  * @author Faivre Pierre
  */
-class Cell {
+public class Cell {
 
     /**
      * État de la cellule : true -> vivante et false -> morte.

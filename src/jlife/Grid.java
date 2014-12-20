@@ -18,7 +18,7 @@
  *
  * Grid.java
  * Creation : 29/09/2013
- * Last modification : 19/12/2014
+ * Last modification : 20/12/2014
  *
  * Description : Implémentation basique du jeu de la vie de John Horton Conway.
  */
@@ -33,7 +33,7 @@ import java.util.Random;
  * Classe définissant la grille contenant les cellules.
  * @author Faivre Pierre
  */
-class Grid {
+public class Grid {
 
     /**
      * Liste contenant toutes les cellules.
@@ -103,13 +103,10 @@ class Grid {
             density = 10;
 
         this.grid = new ArrayList<>();
+        
         for (int i = 0; i < width * height; i++) {
             // 1 chance sur "11 - density" que la cellule soit vivante.
-            if (rand.nextInt(11 - density) + 1 == 1)
-                state = true;
-            else
-                state = false;
-
+            state = rand.nextInt(11 - density) + 1 == 1;
             this.grid.add(new Cell(state));
         }
     }
@@ -159,30 +156,38 @@ class Grid {
 
     /**
      * Modifie la grille pour arriver à l'itération suivante.
-     * TODO: Ajouter la détection si la grille est inerte.
-     * @return Booléen valant false s'il n'y a plus de cellule vivante
-     *         ou si la grille est inerte
+     * @return Booléen valant false si la grille est inerte
      */
     public boolean nextGeneration() {
         int nbAlive = 0;         // Compteur de cellules en vie
+        boolean inert = true;    // Indique si la grille a changé depuis la dernière génération
         int livingNeighbors = 0; // Compteur de cellules voisines vivantes à une autre cellule
+        boolean nextGenerationState;
 
         // On boucle pour déterminer pour chaque cellule le nombre de voisins vivants.
         // Suivant l'état actuel de la cellule on détermine alors son état suivant.
         for (int i = 0; i < this.width * this.height; i++) {
             Cell c = this.grid.get(i);
-            livingNeighbors = getLivingNeighbors(i);
-            // S'il y a 0 ou 1 ou plus de 4 voisins vivants, la cellule sera morte.
-            if (livingNeighbors <= 1 || livingNeighbors >= 4) {
-                c.setNextGenerationState(false);
-            }
+            livingNeighbors = this.getLivingNeighbors(i);
             // S'il y a 2 voisins, la cellule garde son état.
-            else if (livingNeighbors == 2) {
-                c.setNextGenerationState(c.isAlive());
+            if (livingNeighbors == 2) {
+                nextGenerationState = c.isAlive();
             }
             // S'il y a 3 voisins, la cellule naîtra.
             else if (livingNeighbors == 3) {
-                c.setNextGenerationState(true);
+                nextGenerationState = true;
+            }
+            // Sinon, il y a 0 ou 1 ou plus de 4 voisins vivants, la cellule sera alors morte.
+            else {
+                nextGenerationState = false;
+            }
+            
+            // On applique le futur état
+            c.setNextGenerationState(nextGenerationState);
+            
+            // Si la cellule change, alors la grille n'est pas inerte
+            if (c.isAlive() != nextGenerationState) {
+                inert = false;
             }
         }
 
@@ -195,7 +200,7 @@ class Grid {
         }
 
         this.generation++;
-        return nbAlive > 0;
+        return nbAlive > 0 && !inert;
     }
 
     /**
