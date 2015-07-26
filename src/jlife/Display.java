@@ -38,29 +38,32 @@ public class Display {
      */
     public static void drawGrid(Grid grid) {
         int count = 0; // Compteur pour connaître la position dans la ligne.
+        StringBuilder out = new StringBuilder();
 
         // Ligne supérieure
         for (int i = 0; i < grid.getWidth(); i++) {
-            System.out.print('_');
+            out.append('_');
         }
-        System.out.println("");
+        out.append(System.lineSeparator());
 
         // Contenu de la grille
         for (int i = 0; i < grid.getWidth() * grid.getHeight(); i++) {
             if (grid.get(i).isAlive()) {
-                System.out.print('#');
+                out.append('#');
             } else {
-                System.out.print(' ');
+                out.append(' ');
             }
 
             // Quand on arrive à la fin de la ligne, on insère un saut de ligne.
             count++;
             if (count == grid.getWidth()) {
-                System.out.println("|");
+                out.append('|').append(System.lineSeparator());
                 count = 0;
             }
         }
-        System.out.println("Generation : " + grid.getGeneration() + " ; population : " + grid.getNbAliveCells());
+        out.append("Generation : " + grid.getGeneration() + " ; population : " + grid.getNbAliveCells());
+
+        System.out.println(out.toString());
     }
 
     /**
