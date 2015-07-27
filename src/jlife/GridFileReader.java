@@ -42,6 +42,7 @@ public class GridFileReader {
     
     private int width;
     private int height;
+    private int population;
     private String fileName;
     
     /**
@@ -52,12 +53,15 @@ public class GridFileReader {
         FileReader fr = new FileReader(this.fileName);
         this.width = 0;
         this.height = 0;
+        this.population = 0;
         
         // *** Calcul des dimensions de la grille ***
         int lineWidth = 0;
         int c = fr.read(); // Première lecture
         while (c != -1) {  // Tant qu'on n'atteint pas la fin du fichier
             while (c != '\n' && c != -1) { // Tant qu'on atteint pas la fin de ligne
+                if (c == '#')
+                    this.population++;
                 lineWidth++;
                 c = fr.read();
             }
@@ -119,6 +123,14 @@ public class GridFileReader {
      */
     public int getHeight() {
         return this.height;
+    }
+
+    /**
+     * Donne la population présente dans le ficher
+     * @return Nombre de cellules vivantes
+     */
+    public int getPopulation() {
+        return this.population;
     }
     
 }

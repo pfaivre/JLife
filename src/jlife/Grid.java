@@ -57,6 +57,11 @@ public class Grid {
     private int generation;
 
     /**
+     * Nombre de cellules vivantes dans la grille
+     */
+    private int population;
+
+    /**
      * Créée une nouvelle grille et la remplit avec le fichier spécifié.
      */
     public Grid(String file) throws IOException {
@@ -65,6 +70,7 @@ public class Grid {
         this.height = gfr.getHeight();
         this.grid = gfr.getGrid();
         this.generation = 0;
+        this.population = gfr.getPopulation();
     }
 
     /**
@@ -76,6 +82,7 @@ public class Grid {
         this.width = width;
         this.height = height;
         this.generation = 0;
+        this.population = 0;
 
         this.grid = new ArrayList<>();
         for (int i = 0; i < width * height; i++) {
@@ -95,6 +102,7 @@ public class Grid {
         this.width = width;
         this.height = height;
         this.generation = 0;
+        this.population = 0;
 
         // Vérification sur le paramètre de densité
         if (density < 1)
@@ -107,6 +115,8 @@ public class Grid {
         for (int i = 0; i < width * height; i++) {
             // 1 chance sur "11 - density" que la cellule soit vivante.
             state = rand.nextInt(11 - density) + 1 == 1;
+            if (state)
+                population++;
             this.grid.add(new Cell(state));
         }
     }
@@ -135,14 +145,8 @@ public class Grid {
     /**
      * @return Le nombre de cellules vivantes sur la grille.
      */
-    public int getNbAliveCells() {
-        int nbAlive = 0;
-        for (int i = 0; i < this.width * this.height; i++) {
-            if (this.grid.get(i).isAlive())
-                nbAlive++;
-        }
-
-        return nbAlive;
+    public int getPopulation() {
+        return this.population;
     }
 
     /**
@@ -159,7 +163,6 @@ public class Grid {
      * @return Booléen valant false si la grille est inerte
      */
     public boolean nextGeneration() {
-        int nbAlive = 0;         // Compteur de cellules en vie
         boolean inert = true;    // Indique si la grille a changé depuis la dernière génération
         int livingNeighbors = 0; // Compteur de cellules voisines vivantes à une autre cellule
         boolean nextGenerationState;
@@ -181,10 +184,10 @@ public class Grid {
             else {
                 nextGenerationState = false;
             }
-            
+
             // On applique le futur état
             c.setNextGenerationState(nextGenerationState);
-            
+
             // Si la cellule change, alors la grille n'est pas inerte
             if (c.isAlive() != nextGenerationState) {
                 inert = false;
@@ -192,15 +195,16 @@ public class Grid {
         }
 
         // On boucle ensuite pour appliquer ces changements.
+        this.population = 0;
         for (int i = 0; i < this.width * this.height; i++) {
             this.grid.get(i).changeState();
             // On compte au passage le nombre de cellules restantes.
             if (this.grid.get(i).isAlive())
-                nbAlive++;
+                this.population++;
         }
 
         this.generation++;
-        return nbAlive > 0 && !inert;
+        return this.population > 0 && !inert;
     }
 
     /**

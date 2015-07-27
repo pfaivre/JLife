@@ -51,7 +51,12 @@ public enum Color {
     private String code;
     
     Color(String code) {
-        this. code = code;
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("linux"))
+            // Color codes are not supported on Windows
+            this. code = "";
+        else
+            this.code = code;
     }
     
     @Override

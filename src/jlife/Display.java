@@ -61,7 +61,7 @@ public class Display {
                 count = 0;
             }
         }
-        out.append("Generation : " + grid.getGeneration() + " ; population : " + grid.getNbAliveCells());
+        out.append("Generation : ").append(grid.getGeneration()).append(" ; population : ").append(grid.getPopulation());
 
         System.out.println(out.toString());
     }
